@@ -1,0 +1,68 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger:
+      branch: master
+      repo: https://gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleazy-yellow-koala.sh
+        container: qc.acc_seedy-pear-ragdoll
+  QC.Doc:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-cream-dragonfly.sh
+        container: qc.doc_shabby-rust-swan
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-scarlet-barnacle.sh
+        container: qc.doc_wiggy-auburn-moorhen
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.scummy-champagne-chinchilla.sh
+        container: qc.doc_frumpy-pink-hornet
+  QC.Lic:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.geeky-lime-kakapo.sh
+        container: qc.lic_wimpy-cream-lizard
+  QC.Sec:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-white-harrier.sh
+        container: qc.sec_skanky-coral-frise
+  QC.Sty:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-thistle-leopard.sh
+        container: qc.sty_sleepy-linen-capybara
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.hilly-cerulean-mammoth.sh
+        container: qc.sty_pretty-lemon-moorhen
+  QC.Uni:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.droopy-ultramarine-paradise.sh
+        container: qc.uni_nerdy-rose-baboon
+  QC.Ver:
+    repos:
+      gitlab.geo3bcn.csic.es/dtgeo_geo3bcn/dtc-v2/trigger get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-denim-tetra.sh
+        container: qc.ver_chewy-scarlet-argentino
+timeout: 5400
